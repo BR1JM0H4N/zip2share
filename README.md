@@ -70,7 +70,7 @@ A lightweight Android application that zips one or multiple shared files into a 
 
 ![demo-gif](https://github.com/BR1JM0H4N/zip2share/blob/main/Screenshots/demo%20use.gif)
 
-(https://raw.githubusercontent.com/BR1JM0H4N/zip2share/refs/heads/main/Screenshots/demo2.mp4)
+<video src="https://raw.githubusercontent.com/BR1JM0H4N/zip2share/refs/heads/main/Screenshots/demo2.mp4" width="352" height="720"></video>
 
 ## Credits
 
