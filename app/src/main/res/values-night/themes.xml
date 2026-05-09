@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
-        <item name="android:navigationBarColor">?attr/colorSurface</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <!-- Dark mode: status bar icons should be light -->
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="AppTheme" parent="Base.AppTheme" />

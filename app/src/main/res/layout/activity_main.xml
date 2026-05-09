@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Material 3 layout for Zip2Share.
+    All colours use ?attr/ tokens → both light and dark themes work automatically.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface">
+    android:background="?attr/colorSurface"
+    android:fitsSystemWindows="true">
 
-    <!-- AppBar uses colorSurfaceVariant — a muted tinted tone, never blinding white -->
+    <!-- Top app bar -->
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        app:backgroundColor="?attr/colorSurfaceVariant"
         app:liftOnScroll="false">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -21,31 +24,27 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name"
-            app:titleCentered="true"
-            app:titleTextColor="?attr/colorOnSurfaceVariant" />
+            app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Main content, scrollable behaviour so it clears the toolbar -->
+    <!-- Main content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:paddingBottom="80dp"
+        android:padding="32dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- Circular icon container using secondaryContainer token -->
+        <!-- App icon inside a tinted surface container -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             app:cardCornerRadius="60dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="?attr/colorSecondaryContainer"
-            app:strokeWidth="0dp">
+            app:cardBackgroundColor="?attr/colorSecondaryContainer">
 
             <ImageView
                 android:layout_width="72dp"
@@ -56,6 +55,7 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- App name -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +64,7 @@
             android:textAppearance="?attr/textAppearanceHeadlineMedium"
             android:textColor="?attr/colorOnSurface" />
 
+        <!-- Dynamic status message -->
         <TextView
             android:id="@+id/statusText"
             android:layout_width="wrap_content"
@@ -74,6 +75,7 @@
             android:textAppearance="?attr/textAppearanceBodyLarge"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
+        <!-- Item count badge -->
         <TextView
             android:id="@+id/fileCountText"
             android:layout_width="wrap_content"
@@ -83,6 +85,7 @@
             android:textAppearance="?attr/textAppearanceLabelMedium"
             android:textColor="?attr/colorPrimary" />
 
+        <!-- Linear progress indicator (Material 3) -->
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progressBar"
             android:layout_width="match_parent"
@@ -95,7 +98,7 @@
 
     </LinearLayout>
 
-    <!-- GitHub footer pinned to bottom -->
+    <!-- GitHub footer -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,12 +109,14 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
+        <!-- GitHub icon: tinted via ?attr/colorOnSurfaceVariant for theme-awareness -->
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@drawable/ic_github"
             android:contentDescription="GitHub"
-            android:layout_marginEnd="6dp" />
+            android:layout_marginEnd="6dp"
+            app:tint="?attr/colorOnSurfaceVariant" />
 
         <TextView
             android:layout_width="wrap_content"

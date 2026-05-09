@@ -10,8 +10,8 @@ android {
         applicationId = "com.mohan.zip2share"
         minSdk = 21
         targetSdk = 34
-        versionCode = 4
-        versionName = "4.0"
+        versionCode = 5
+        versionName = "5.0"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -55,6 +55,9 @@ dependencies {
 
     // Material 3
     implementation("com.google.android.material:material:1.12.0")
+
+    // DocumentFile — required for directory tree traversal
+    implementation("androidx.documentfile:documentfile:1.0.1")
 
     // ConstraintLayout (kept for future use)
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
