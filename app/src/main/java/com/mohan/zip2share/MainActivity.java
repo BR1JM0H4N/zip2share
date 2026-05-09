@@ -344,7 +344,8 @@ public class MainActivity extends AppCompatActivity {
     // -------------------------------------------------------------------------
 
     @SuppressWarnings("deprecation")
-    private <T> T getParcelableExtraCompat(Intent intent, String key, Class<T> clazz) {
+    private <T extends android.os.Parcelable> T getParcelableExtraCompat(
+            Intent intent, String key, Class<T> clazz) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             return intent.getParcelableExtra(key, clazz);
         }
@@ -352,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("deprecation")
-    private <T> ArrayList<T> getParcelableArrayListExtraCompat(
+    private <T extends android.os.Parcelable> ArrayList<T> getParcelableArrayListExtraCompat(
             Intent intent, String key, Class<T> clazz) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             return intent.getParcelableArrayListExtra(key, clazz);
