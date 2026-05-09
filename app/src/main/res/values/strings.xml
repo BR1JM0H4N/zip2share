@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">zip2share</string>
+    <string name="app_name">Zip2Share</string>
+    <string name="github_link">github.com/BR1JM0H4N</string>
 
+    <!-- Status messages -->
+    <string name="status_idle">Select files and share them with Zip2Share</string>
+    <string name="status_zipping">Zipping files…</string>
+    <string name="status_zipping_progress">Compressing file %1$d of %2$d…</string>
+    <string name="status_file_count">%1$d file(s) selected</string>
+    <string name="status_ready">ZIP ready — launching share…</string>
+
+    <!-- Errors -->
+    <string name="error_no_files">No files received to zip.</string>
+    <string name="error_directories_only">Directories cannot be zipped. Please select individual files.</string>
+    <string name="error_zip_failed">Failed to create ZIP: %1$s</string>
+    <string name="error_no_share_app">No app found to share the ZIP.</string>
+
+    <!-- Warnings -->
+    <string name="warn_skipped_title">Some items were skipped</string>
+    <string name="warn_skipped_intro">The following items could not be added to the ZIP:</string>
+
+    <!-- Actions -->
+    <string name="action_share_anyway">Share anyway</string>
+    <string name="action_dismiss">Dismiss</string>
+    <string name="share_chooser_title">Share ZIP Archive</string>
 </resources>

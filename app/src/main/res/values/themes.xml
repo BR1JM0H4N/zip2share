@@ -1,9 +1,16 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-  <!-- Base application theme. -->
-  <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-    <!-- Customize your theme here. -->
-    <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-  </style>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Inherit from Material 3 DayNight.
+        On Android 12+ the system injects dynamic (Monet) colour tokens
+        automatically, so we deliberately leave colorPrimary etc. unset
+        here — Material You does the right thing.
+        On older devices, Material3 falls back to its built-in purple palette.
+    -->
+    <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Edge-to-edge: let the app draw under system bars -->
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
 
-  <style name="AppTheme" parent="Base.AppTheme" />
+    <style name="AppTheme" parent="Base.AppTheme" />
 </resources>
