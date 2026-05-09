@@ -1,42 +1,63 @@
-name: Android CI
+name: Android CI Fast
 
 on:
   workflow_dispatch:
-#on:
-  #push:
-    #branches: [ "main" ]
-  #pull_request:
-    #branches: [ "main" ]
+    inputs:
+      buildType:
+        description: 'Choose build type'
+        required: true
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - debug
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
+    # ✅ Cache Gradle dependencies and wrapper
+    - name: Cache Gradle files
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    # ✅ Setup JDK 17
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: gradle
 
+    # ✅ Setup Android SDK (faster and clean)
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v3
+
+    # ✅ Make gradlew executable
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Release APK
-      run: ./gradlew assembleRelease
+    # ✅ Build APK based on input
+    - name: Build ${{ github.event.inputs.buildType }} APK
+      run: ./gradlew assemble${{ github.event.inputs.buildType == 'release' && 'Release' || 'Debug' }} --stacktrace --no-daemon
 
-    - name: List Files in APK Directory (for Debugging)
-      run: ls -alh app/build/outputs/apk/release/
-
-    - name: Upload Release APK
+    # ✅ Upload the APK artifact
+    - name: Upload ${{ github.event.inputs.buildType }} APK
       uses: actions/upload-artifact@v4
       with:
-        name: zip2share-release-apk
-        path: app/build/outputs/apk/release/*.apk
+        name: tocGen-${{ github.event.inputs.buildType }}-apk
+        path: app/build/outputs/apk/${{ github.event.inputs.buildType }}/*.apk
         if-no-files-found: warn
         compression-level: 6
         overwrite: false
         include-hidden-files: false
+        retention-days: 7
