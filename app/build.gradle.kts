@@ -49,9 +49,9 @@ android {
 }
 
 dependencies {
-    // AppCompat + Activity (activity-ktx brings registerForActivityResult compat)
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.activity:activity:1.9.0")
+    // appcompat 1.7.0 has a D8 dexing NPE with minSdk 21 on older toolchains — use 1.6.1
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.activity:activity:1.8.2")
 
     // Material 3
     implementation("com.google.android.material:material:1.12.0")
