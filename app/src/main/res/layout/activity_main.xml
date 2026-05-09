@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Material 3 layout for Zip2Share.
-    Uses ?attr/color* tokens so the system dynamic colour palette
-    (Material You / monet) is honoured automatically on Android 12+.
--->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
-    android:fitsSystemWindows="true">
+    android:background="?attr/colorSurface">
 
-    <!-- Top app bar (no title — we are a transient share-target) -->
+    <!-- AppBar uses colorSurfaceVariant — a muted tinted tone, never blinding white -->
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
+        app:backgroundColor="?attr/colorSurfaceVariant"
         app:liftOnScroll="false">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -25,27 +21,31 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name"
-            app:titleCentered="true" />
+            app:titleCentered="true"
+            app:titleTextColor="?attr/colorOnSurfaceVariant" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Main content -->
+    <!-- Main content, scrollable behaviour so it clears the toolbar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="32dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="80dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- App icon inside a tinted surface container -->
+        <!-- Circular icon container using secondaryContainer token -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             app:cardCornerRadius="60dp"
             app:cardElevation="0dp"
-            app:cardBackgroundColor="?attr/colorSecondaryContainer">
+            app:cardBackgroundColor="?attr/colorSecondaryContainer"
+            app:strokeWidth="0dp">
 
             <ImageView
                 android:layout_width="72dp"
@@ -56,7 +56,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- App name -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +64,6 @@
             android:textAppearance="?attr/textAppearanceHeadlineMedium"
             android:textColor="?attr/colorOnSurface" />
 
-        <!-- Dynamic status message -->
         <TextView
             android:id="@+id/statusText"
             android:layout_width="wrap_content"
@@ -76,7 +74,6 @@
             android:textAppearance="?attr/textAppearanceBodyLarge"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
-        <!-- File count badge -->
         <TextView
             android:id="@+id/fileCountText"
             android:layout_width="wrap_content"
@@ -86,7 +83,6 @@
             android:textAppearance="?attr/textAppearanceLabelMedium"
             android:textColor="?attr/colorPrimary" />
 
-        <!-- Linear progress bar (Material 3 style) -->
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progressBar"
             android:layout_width="match_parent"
@@ -99,7 +95,7 @@
 
     </LinearLayout>
 
-    <!-- GitHub footer -->
+    <!-- GitHub footer pinned to bottom -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--
-        Inherit from Material 3 DayNight.
-        On Android 12+ the system injects dynamic (Monet) colour tokens
-        automatically, so we deliberately leave colorPrimary etc. unset
-        here — Material You does the right thing.
-        On older devices, Material3 falls back to its built-in purple palette.
-    -->
     <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Edge-to-edge: let the app draw under system bars -->
+        <!--
+            colorSurfaceVariant is a tinted, mid-tone colour derived from the
+            system palette — darker/richer than plain white on light theme,
+            lighter/softer on dark theme. Perfect for the status-bar area.
+        -->
+        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
 
