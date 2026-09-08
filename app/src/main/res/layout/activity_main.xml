@@ -9,14 +9,14 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
-    android:fitsSystemWindows="true">
+    android:background="?attr/colorSurface">
 
-    <!-- Top app bar -->
+    <!-- Top app bar. Insets are applied manually in code (see applyWindowInsets()),
+         since edge-to-edge is enforced (not opt-in) from Android 15+ and
+         fitsSystemWindows is ignored in that case. -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
         app:liftOnScroll="false">
 
         <com.google.android.material.appbar.MaterialToolbar
@@ -30,6 +30,7 @@
 
     <!-- Main content -->
     <LinearLayout
+        android:id="@+id/contentArea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -92,7 +93,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:visibility="gone"
-            app:trackCornerRadius="4dp"
+            app:trackCornerRadius="8dp"
+            app:trackThickness="8dp"
             app:indicatorColor="?attr/colorPrimary"
             app:trackColor="?attr/colorSurfaceVariant" />
 
@@ -100,6 +102,7 @@
 
     <!-- GitHub footer -->
     <LinearLayout
+        android:id="@+id/footerArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"

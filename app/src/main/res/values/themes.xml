@@ -4,17 +4,20 @@
         Material 3 DayNight theme — automatically switches between light and dark
         based on the system setting (AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM).
 
-        On Android 12+ the Monet/dynamic colour engine injects colorPrimary etc.
-        automatically. On older devices Material3 uses its built-in teal/purple
-        fallback palette.
+        On Android 12+, DynamicColors.applyToActivityIfAvailable() (called in
+        MainActivity.onCreate) injects the user's system wallpaper palette
+        (colorPrimary, colorSecondaryContainer, etc.) into this theme at runtime.
+        On older devices, or if dynamic colour is unsupported, Material 3's
+        built-in baseline palette below is used instead.
+
+        Status/navigation bar contrast (light vs. dark icons) is handled
+        automatically at runtime by EdgeToEdge.enable() in MainActivity, so it is
+        intentionally not hardcoded here.
     -->
     <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Edge-to-edge: draw under status bar and navigation bar -->
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <!-- Ensure system icon tint follows theme -->
-        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AppTheme" parent="Base.AppTheme" />

@@ -4,14 +4,14 @@ plugins {
 
 android {
     namespace = "com.mohan.zip2share"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.mohan.zip2share"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 5
-        versionName = "5.0"
+        targetSdk = 36
+        versionCode = 6
+        versionName = "5.5"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -49,11 +49,12 @@ android {
 }
 
 dependencies {
-    // appcompat 1.7.0 has a D8 dexing NPE with minSdk 21 on older toolchains — use 1.6.1
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.activity:activity:1.8.2")
+    // 1.7.0 fixed the D8 dexing NPE that affected 1.6.x on minSdk 21 with newer AGP —
+    // needed for correct predictive-back + edge-to-edge behavior on Android 15/16.
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.activity:activity:1.9.3")
 
-    // Material 3
+    // Material 3 — includes DynamicColors for Material You system-palette theming
     implementation("com.google.android.material:material:1.12.0")
 
     // DocumentFile — required for directory tree traversal

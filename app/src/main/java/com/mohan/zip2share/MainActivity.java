@@ -1,10 +1,14 @@
 package com.mohan.zip2share;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.documentfile.provider.DocumentFile;
 
 import android.content.ActivityNotFoundException;
@@ -19,6 +23,7 @@ import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 
+import com.google.android.material.color.DynamicColors;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.mohan.zip2share.databinding.ActivityMainBinding;
@@ -58,11 +63,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // Follow the system light/dark setting — must be called before super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+
+        // Apply the Material You (Monet) system colour palette to this Activity's theme
+        // on Android 12+. On older devices this is a harmless no-op and the Material 3
+        // baseline palette from themes.xml is used instead.
+        DynamicColors.applyToActivityIfAvailable(this);
+
         super.onCreate(savedInstanceState);
+
+        // Draw edge-to-edge behind the status/nav bars ourselves rather than relying on
+        // fitsSystemWindows, which Android 15+ ignores for apps targeting SDK 35+.
+        EdgeToEdge.enable(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        applyWindowInsets();
 
         // Modern activity-result API (replaces deprecated startActivityForResult)
         shareLauncher = registerForActivityResult(
@@ -70,8 +86,26 @@ public class MainActivity extends AppCompatActivity {
             result -> cleanupAndFinish()
         );
 
-        clearCache();
+        // Off the UI thread: avoids jank on startup, and avoids racing with a
+        // concurrent share (a second SEND intent spins up a second Activity
+        // instance sharing the same cache dir — see clearCache() for how that's handled).
+        executor.execute(this::clearCache);
         handleIncomingIntent(getIntent());
+    }
+
+    /**
+     * Manually applies system-bar insets as padding, since edge-to-edge is now enforced
+     * (not opt-in) starting with apps targeting Android 15 (API 35) and up.
+     */
+    private void applyWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
+            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
+                    | WindowInsetsCompat.Type.displayCutout());
+            binding.toolbar.setPadding(bars.left, bars.top, bars.right, 0);
+            binding.contentArea.setPadding(bars.left, 0, bars.right, 0);
+            binding.footerArea.setPadding(bars.left, 0, bars.right, bars.bottom);
+            return insets;
+        });
     }
 
     @Override
@@ -483,22 +517,29 @@ public class MainActivity extends AppCompatActivity {
     // Cache / lifecycle cleanup
     // -------------------------------------------------------------------------
 
+    /**
+     * Removes leftover ZIP files from previous runs. Deliberately scoped to files
+     * matching this app's own "zip2share_*.zip" naming pattern (rather than wiping
+     * getCacheDir() wholesale), so that a second share intent — which spins up a
+     * second Activity instance sharing the same cache directory — can never delete
+     * the first instance's in-progress or not-yet-shared output file.
+     */
     private void clearCache() {
         try {
-            deleteDir(getCacheDir());
+            File cacheDir = getCacheDir();
+            File[] children = cacheDir.listFiles();
+            if (children == null) return;
+            for (File child : children) {
+                String name = child.getName();
+                if (child.isFile()
+                        && name.startsWith("zip2share_")
+                        && name.endsWith(".zip")
+                        && !child.equals(tempZipFile)) {
+                    child.delete();
+                }
+            }
         } catch (Exception e) {
             Log.w(TAG, "clearCache failed", e);
         }
-    }
-
-    private void deleteDir(File dir) {
-        if (dir == null) return;
-        if (dir.isDirectory()) {
-            File[] children = dir.listFiles();
-            if (children != null) {
-                for (File child : children) deleteDir(child);
-            }
-        }
-        dir.delete();
     }
 }
