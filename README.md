@@ -12,7 +12,7 @@
 ![Java](https://img.shields.io/badge/Java-17-blue?logo=java)
 ![Min SDK](https://img.shields.io/badge/minSdk-21-brightgreen)
 ![Target SDK](https://img.shields.io/badge/targetSdk-34-blue)
-![Version](https://img.shields.io/badge/version-3.0.0-yellow)
+![Version](https://img.shields.io/badge/version-6.0.0-green)
 
 ![License](https://img.shields.io/github/license/BR1JM0H4N/zip2share)
 ![Stars](https://img.shields.io/github/stars/BR1JM0H4N/zip2share?style=social)
