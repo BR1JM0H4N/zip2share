@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Fixed horizontal breathing room for all content, applied on top of the
+        system-bar/cutout inset in MainActivity.applyWindowInsets(). This matches
+        the ~24dp side margins used across Google's own apps (Gmail, Files,
+        Settings) so content never sits flush against the screen edge, even on
+        edge-to-edge displays.
+    -->
+    <dimen name="content_horizontal_margin">24dp</dimen>
+
+    <!-- Extra bottom breathing room below the footer, on top of the nav-bar inset. -->
+    <dimen name="footer_bottom_margin">16dp</dimen>
+</resources>

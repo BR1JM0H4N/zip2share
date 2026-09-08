@@ -94,16 +94,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Manually applies system-bar insets as padding, since edge-to-edge is now enforced
-     * (not opt-in) starting with apps targeting Android 15 (API 35) and up.
+     * Applies system-bar insets as padding, on top of the layout's own fixed content
+     * margins — the same approach Google's own apps (Gmail, Files, Settings) use.
+     * The screen still draws edge-to-edge behind the status/nav bars for a seamless
+     * background, but visible content (toolbar title, icon, text, footer) always
+     * keeps generous, consistent spacing from the screen edges — it never sits
+     * flush against them.
      */
     private void applyWindowInsets() {
+        final int contentHorizontalMargin = getResources()
+                .getDimensionPixelSize(R.dimen.content_horizontal_margin);
+        final int footerBottomMargin = getResources()
+                .getDimensionPixelSize(R.dimen.footer_bottom_margin);
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars()
                     | WindowInsetsCompat.Type.displayCutout());
-            binding.toolbar.setPadding(bars.left, bars.top, bars.right, 0);
-            binding.contentArea.setPadding(bars.left, 0, bars.right, 0);
-            binding.footerArea.setPadding(bars.left, 0, bars.right, bars.bottom);
+
+            binding.toolbar.setPadding(
+                    bars.left + contentHorizontalMargin,
+                    bars.top,
+                    bars.right + contentHorizontalMargin,
+                    0);
+
+            binding.contentArea.setPadding(
+                    bars.left + contentHorizontalMargin,
+                    0,
+                    bars.right + contentHorizontalMargin,
+                    0);
+
+            binding.footerArea.setPadding(
+                    bars.left + contentHorizontalMargin,
+                    0,
+                    bars.right + contentHorizontalMargin,
+                    bars.bottom + footerBottomMargin);
+
             return insets;
         });
     }

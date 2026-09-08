@@ -28,17 +28,22 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Main content -->
+    <!-- Main content. Horizontal padding is applied in code (applyWindowInsets()) so it
+         correctly accounts for both the display cutout/system-bar inset AND a fixed
+         breathing-room margin, matching Google apps' spacing conventions. -->
     <LinearLayout
         android:id="@+id/contentArea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="32dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="32dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- App icon inside a tinted surface container -->
+        <!-- App icon inside a tinted surface container. The container itself uses
+             colorSecondaryContainer, so its background still follows the system's
+             Material You palette — only the icon artwork inside it is fixed. -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -51,7 +56,7 @@
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher_foreground"
+                android:src="@drawable/ic_hero_zip"
                 android:contentDescription="@string/app_name" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -100,17 +105,14 @@
 
     </LinearLayout>
 
-    <!-- GitHub footer -->
+    <!-- GitHub footer. Padding is fully applied in code (applyWindowInsets()). -->
     <LinearLayout
         android:id="@+id/footerArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingBottom="24dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:gravity="center_vertical">
 
         <!-- GitHub icon: tinted via ?attr/colorOnSurfaceVariant for theme-awareness -->
         <ImageView

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Hero icon shown in the center of the main screen: a phone silhouette with a
+    folder (containing a download arrow) peeking out the top, labelled "ZIP".
+    Uses hardcoded colours (not theme attrs) to match the reference artwork's
+    look consistently across light/dark and dynamic-color themes, matching how
+    it renders inside the tinted MaterialCardView container.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- Phone body -->
+    <path
+        android:pathData="M30,22 h36 a6,6 0 0 1 6,6 v56 a6,6 0 0 1 -6,6 h-36 a6,6 0 0 1 -6,-6 v-56 a6,6 0 0 1 6,-6 z"
+        android:fillColor="#F5F5F5"
+        android:strokeColor="#B0BEC5"
+        android:strokeWidth="1.5"/>
+
+    <!-- Phone screen inset -->
+    <path
+        android:pathData="M28,32 h40 v48 h-40 z"
+        android:fillColor="#FFFFFF"/>
+
+    <!-- Phone speaker notch -->
+    <path
+        android:pathData="M42,26 h12 a1.5,1.5 0 0 1 1.5,1.5 a1.5,1.5 0 0 1 -1.5,1.5 h-12 a1.5,1.5 0 0 1 -1.5,-1.5 a1.5,1.5 0 0 1 1.5,-1.5 z"
+        android:fillColor="#CFD8DC"/>
+
+    <!-- Phone home indicator -->
+    <path
+        android:pathData="M40,84 h16 a1.5,1.5 0 0 1 1.5,1.5 a1.5,1.5 0 0 1 -1.5,1.5 h-16 a1.5,1.5 0 0 1 -1.5,-1.5 a1.5,1.5 0 0 1 1.5,-1.5 z"
+        android:fillColor="#CFD8DC"/>
+
+    <!-- Folder back tab -->
+    <path
+        android:pathData="M35,20 h11 l4,5 h13 a3,3 0 0 1 3,3 v22 a3,3 0 0 1 -3,3 h-28 a3,3 0 0 1 -3,-3 v-27 a3,3 0 0 1 3,-3 z"
+        android:fillColor="#FFE0B2"/>
+
+    <!-- Folder front flap -->
+    <path
+        android:pathData="M33,26 h33 a3,3 0 0 1 3,3 v20 a3,3 0 0 1 -3,3 h-33 a3,3 0 0 1 -3,-3 v-20 a3,3 0 0 1 3,-3 z"
+        android:fillColor="#FFB74D"/>
+
+    <!-- ZIP badge background -->
+    <path
+        android:pathData="M39,52 h18 a2,2 0 0 1 2,2 v9 a2,2 0 0 1 -2,2 h-18 a2,2 0 0 1 -2,-2 v-9 a2,2 0 0 1 2,-2 z"
+        android:fillColor="#455A64"/>
+
+    <!-- Download arrow (into folder) -->
+    <path
+        android:pathData="M48,36 v10 m0,0 l-4,-4 m4,4 l4,-4"
+        android:strokeColor="#5D4037"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"/>
+
+    <!-- "ZIP" lettering, drawn as simple geometric strokes for crisp vector rendering -->
+    <!-- Z -->
+    <path
+        android:pathData="M40.5,56 h4.6 l-4.6,6.2 h4.8"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"/>
+    <!-- I -->
+    <path
+        android:pathData="M48,56 v6.2"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.3"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"/>
+    <!-- P -->
+    <path
+        android:pathData="M51,62.2 v-6.2 h2.3 a1.7,1.7 0 0 1 0,3.4 h-2.3"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"/>
+
+</vector>
