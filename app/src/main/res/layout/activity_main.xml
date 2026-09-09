@@ -53,10 +53,10 @@
             app:cardBackgroundColor="?attr/colorSecondaryContainer">
 
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_hero_zip"
+                android:src="@mipmap/ic_launcher_foreground"
                 android:contentDescription="@string/app_name" />
 
         </com.google.android.material.card.MaterialCardView>
